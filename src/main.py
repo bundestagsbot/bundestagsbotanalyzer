@@ -85,7 +85,7 @@ async def assign_active_member(*args):
                          key=lambda item: item.count, reverse=True)
     SHL.debug(f"{len(sorted_list)} users sent enough messages.")
 
-    log_embed = InfoEmbed(title="Aktivsten User")
+    log_embed = InfoEmbed(title="Aktivste User - Log")
     for stat in sorted_list:  # active user
         try:
             member = await guild.fetch_member(stat.user_obj.id)
@@ -102,7 +102,8 @@ async def assign_active_member(*args):
                 break
     await log_channel.send(embed=log_embed)
 
-    announcement = InfoEmbed(title="Aktivsten User", description="Für die Auswahl der Stammmitglieder.\n")
+    announcement = InfoEmbed(title="Aktivste User", description="Für die Auswahl der Stammmitglieder.\n"
+                                                                "Nachrichtenanzahl im letzten Monat.")
     for stat in sorted_list[:3]:  # most active user
         member = await guild.fetch_member(stat.user_obj.id)
         announcement.description += f"{member.mention} : {stat.count} Nachrichten.\n"
